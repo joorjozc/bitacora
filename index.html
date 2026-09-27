@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bitácora · La app de tu viaje, hecha a tu medida</title>
+<meta name="description" content="Dinos a dónde vas, cuándo y con quién. En dos minutos tienes la app de tu viaje: itinerario con horas reales, restaurantes, frases del idioma y presupuesto. Funciona sin conexión.">
+<meta name="theme-color" content="#0C1A1C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta property="og:title" content="Bitácora · La app de tu viaje, hecha a tu medida">
+<meta property="og:description" content="Itinerario con horas reales, restaurantes, frases y presupuesto. Generado con tus datos y disponible sin conexión.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/paletas.css">
+<link rel="stylesheet" href="css/marca.css">
+</head>
+<body class="pagina-marca">
+
+<header class="barra">
+  <a class="barra__logo" href="index.html">Bitácora</a>
+  <button type="button" class="icono" id="btn-tema" aria-label="Cambiar tema"><span aria-hidden="true" id="icono-tema">◐</span></button>
+</header>
+
+<main id="principal">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <p class="hero__k">Una app por viaje, no una guía para todos</p>
+    <h1 class="hero__t">La app de tu viaje,<br>hecha a tu medida</h1>
+    <p class="hero__d">Dinos a dónde vas, cuándo llega tu vuelo, dónde duermes y con quién viajas. En dos minutos tienes el itinerario repartido por horas reales, los sitios donde comer con sus días de cierre, las frases del idioma y el presupuesto calculado. Y funciona sin cobertura.</p>
+    <div class="hero__acc">
+      <a class="boton boton--grande" href="crear.html">Crear mi viaje</a>
+      <a class="boton boton--fantasma" href="#como">Ver cómo funciona</a>
+    </div>
+    <p class="hero__pie">Sin cuenta, sin correo y sin subir nada a ningún sitio: el viaje se queda en tu móvil.</p>
+  </section>
+
+  <!-- ═══ MIS VIAJES ═══ -->
+  <section class="seccion" id="mis-viajes" hidden>
+    <h2 class="seccion__t">Mis viajes</h2>
+    <div id="lista-viajes"></div>
+  </section>
+
+  <!-- ═══ CÓMO FUNCIONA ═══ -->
+  <section class="seccion" id="como">
+    <h2 class="seccion__t">Cómo funciona</h2>
+    <ol class="pasos-lista">
+      <li>
+        <h3>1 · Cuentas tu viaje</h3>
+        <p>Destino, fechas, horas de los dos vuelos, alojamiento, quién viaja y a qué ritmo. Seis pantallas.</p>
+      </li>
+      <li>
+        <h3>2 · Se calcula el plan</h3>
+        <p>El motor reparte los barrios entre los días para no cruzar la ciudad tres veces, encaja las visitas en las horas que quedan libres después del vuelo, mete el parón de mediodía si hace falta y comprueba qué cierra cada día de la semana.</p>
+      </li>
+      <li>
+        <h3>3 · Te lo llevas en el bolsillo</h3>
+        <p>Se instala en la pantalla de inicio y funciona en modo avión. Vas marcando lo que ves, apuntas lo que gastas y lo compartes con quien viaja contigo con un enlace.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ═══ QUÉ LLEVA ═══ -->
+  <section class="seccion">
+    <h2 class="seccion__t">Qué lleva dentro</h2>
+    <div class="tarjetas">
+      <article class="tarj">
+        <h3>Itinerario con horas de verdad</h3>
+        <p>No "día 1: San Marco". Las 8:15 en San Marco porque el vuelo aterrizó a las 20:45 del día anterior, porque el mercado cierra a las 13:00 y porque a las 14:00 hace 33 grados.</p>
+      </article>
+      <article class="tarj">
+        <h3>Dónde comer, con sus cierres</h3>
+        <p>Sitios reales con nivel de precio, día de cierre y teléfono. Filtrados por tu presupuesto y marcados si son cómodos para quien viaja contigo.</p>
+      </article>
+      <article class="tarj">
+        <h3>El idioma, en tarjetas grandes</h3>
+        <p>Ochenta frases con la pronunciación escrita para que la leas tal cual. Se abren a pantalla completa para enseñárselas a alguien.</p>
+      </article>
+      <article class="tarj">
+        <h3>Presupuesto que se recalcula</h3>
+        <p>Traslados, comida, entradas y transporte urbano calculados para tu grupo y tus días. Cambias una opción y el total se mueve. Y vas apuntando lo que gastas de verdad.</p>
+      </article>
+      <article class="tarj">
+        <h3>Checklist que sabe quién eres</h3>
+        <p>Si viaja una embarazada aparece el certificado médico para volar; si hay niños, la autorización paterna; si el país no es de la UE, el seguro en lugar de la tarjeta sanitaria.</p>
+      </article>
+      <article class="tarj">
+        <h3>Sin conexión y sin cuenta</h3>
+        <p>Se instala como una app, funciona en modo avión y no manda tus datos a ningún servidor. El enlace para compartir lleva el viaje dentro.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══ DESTINOS ═══ -->
+  <section class="seccion">
+    <h2 class="seccion__t">Destinos con contenido completo</h2>
+    <p class="seccion__a">En estos, el itinerario sale con sitios reales, precios verificados, trucos y avisos. Para cualquier otro destino se genera el esqueleto del viaje —traslados, horarios, dinero, frases y checklist— listo para rellenar.</p>
+    <div id="lista-destinos" class="destinos destinos--muestra"></div>
+  </section>
+
+  <!-- ═══ PRECIOS ═══ -->
+  <section class="seccion" id="precios">
+    <h2 class="seccion__t">Precios</h2>
+    <div class="planes">
+      <article class="plan">
+        <h3 class="plan__n">Un viaje</h3>
+        <p class="plan__p">Gratis</p>
+        <ul class="plan__l">
+          <li>Un viaje activo</li>
+          <li>Destinos del catálogo y plantilla genérica</li>
+          <li>Sin conexión y compartible por enlace</li>
+        </ul>
+        <a class="boton" href="crear.html">Empezar</a>
+      </article>
+      <article class="plan plan--destacado">
+        <h3 class="plan__n">Viajero</h3>
+        <p class="plan__p">9 € <span>al año</span></p>
+        <ul class="plan__l">
+          <li>Viajes ilimitados y guardados</li>
+          <li>Todos los destinos, según se van publicando</li>
+          <li>Exportar el itinerario a PDF</li>
+          <li>Sincronizar entre los móviles del grupo</li>
+        </ul>
+        <a class="boton" href="crear.html">Probar</a>
+      </article>
+      <article class="plan">
+        <h3 class="plan__n">Marca blanca</h3>
+        <p class="plan__p">A medida</p>
+        <ul class="plan__l">
+          <li>Para agencias y alojamientos</li>
+          <li>Tu logotipo, tus colores y tu dominio</li>
+          <li>Tus propios destinos y recomendaciones</li>
+        </ul>
+        <a class="boton" href="mailto:hola@example.com?subject=Bit%C3%A1cora%20marca%20blanca">Hablamos</a>
+      </article>
+    </div>
+    <p class="seccion__a seccion__a--sm">Lo que hay publicado ahora funciona entero y sin coste: los planes describen hacia dónde va el producto.</p>
+  </section>
+
+  <section class="seccion cierre">
+    <h2 class="seccion__t">¿Vamos?</h2>
+    <a class="boton boton--grande" href="crear.html">Crear mi viaje</a>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <p>Bitácora · hecho con HTML, CSS y JavaScript a secas, para que no se pueda romper.</p>
+  <p>Los precios y horarios de los destinos son orientativos y se revisan por temporada.</p>
+</footer>
+
+<script src="js/packs/catalogo.js"></script>
+<script src="js/almacen.js"></script>
+<script src="js/inicio.js"></script>
+</body>
+</html>

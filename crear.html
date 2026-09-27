@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crear un viaje · Bitácora</title>
+<meta name="description" content="Seis pasos y la app del viaje está hecha: itinerario con horas, restaurantes, frases y presupuesto.">
+<meta name="theme-color" content="#0C1A1C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/paletas.css">
+<link rel="stylesheet" href="css/marca.css">
+</head>
+<body class="pagina-marca">
+
+<header class="barra">
+  <a class="barra__logo" href="index.html">Bitácora</a>
+  <button type="button" class="icono" id="btn-tema" aria-label="Cambiar tema"><span aria-hidden="true" id="icono-tema">◐</span></button>
+</header>
+
+<main class="asistente" id="principal">
+
+  <div class="pasos" id="pasos" aria-label="Progreso"></div>
+
+  <form id="form" novalidate>
+
+    <!-- ═══ 1 · DESTINO ═══ -->
+    <section class="paso" data-paso="0">
+      <h2 class="paso__t">¿A dónde vamos?</h2>
+      <p class="paso__a">De los destinos del catálogo sale un itinerario completo con sitios reales, precios y horarios. Con cualquier otro se genera el esqueleto del viaje, listo para rellenar.</p>
+
+      <div class="destinos" id="destinos" role="radiogroup" aria-label="Destino"></div>
+
+      <div id="destino-otro" hidden>
+        <label class="campo">
+          <span class="campo__l">Ciudad</span>
+          <input type="text" id="ciudad" placeholder="Ámsterdam" autocomplete="off">
+        </label>
+        <label class="campo">
+          <span class="campo__l">País</span>
+          <select id="pais"></select>
+          <span class="campo__ayuda">De aquí salen los teléfonos de emergencia, el idioma de las frases y el tipo de enchufe.</span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ═══ 2 · MODO ═══ -->
+    <section class="paso" data-paso="1" hidden>
+      <h2 class="paso__t">¿Te lo montamos o ya lo tienes?</h2>
+      <p class="paso__a">Las dos opciones acaban en la misma app, con presupuesto, frases, checklist y modo sin conexión. Lo único que cambia es de dónde salen las paradas.</p>
+      <div class="opciones-lista" id="modos"></div>
+    </section>
+
+    <!-- ═══ 3 · FECHAS Y VUELOS ═══ -->
+    <section class="paso" data-paso="2" hidden>
+      <h2 class="paso__t">Fechas y vuelos</h2>
+      <p class="paso__a">Con la hora de llegada y la de salida se calcula qué se puede hacer de verdad el primer día y el último. Si todavía no hay vuelos, se puede dejar en blanco.</p>
+
+      <div class="campo-par">
+        <label class="campo">
+          <span class="campo__l">Llegada</span>
+          <input type="date" id="inicio" required>
+        </label>
+        <label class="campo">
+          <span class="campo__l">Vuelta</span>
+          <input type="date" id="fin" required>
+        </label>
+      </div>
+      <p class="campo__ayuda" id="duracion-nota"></p>
+
+      <h3 class="paso__h">Vuelo de ida</h3>
+      <div class="campo-par">
+        <label class="campo">
+          <span class="campo__l">Sale a las</span>
+          <input type="time" id="ida-salida">
+        </label>
+        <label class="campo">
+          <span class="campo__l">Llega a las</span>
+          <input type="time" id="ida-llegada">
+        </label>
+      </div>
+      <div class="campo-par">
+        <label class="campo">
+          <span class="campo__l">Desde</span>
+          <input type="text" id="ida-desde" placeholder="MAD · Madrid" autocomplete="off">
+        </label>
+        <label class="campo">
+          <span class="campo__l">Aeropuerto de llegada</span>
+          <select id="ida-hasta"></select>
+        </label>
+      </div>
+
+      <h3 class="paso__h">Vuelo de vuelta</h3>
+      <div class="campo-par">
+        <label class="campo">
+          <span class="campo__l">Sale a las</span>
+          <input type="time" id="vuelta-salida">
+        </label>
+        <label class="campo">
+          <span class="campo__l">Llega a las</span>
+          <input type="time" id="vuelta-llegada">
+        </label>
+      </div>
+    </section>
+
+    <!-- ═══ 4 · ALOJAMIENTO ═══ -->
+    <section class="paso" data-paso="3" hidden>
+      <h2 class="paso__t">¿Dónde dormimos?</h2>
+      <p class="paso__a">El nombre y la dirección se convierten en el botón de "cómo llegar" del primer día y en la referencia de los traslados.</p>
+
+      <label class="campo">
+        <span class="campo__l">Nombre del alojamiento</span>
+        <input type="text" id="aloj-nombre" placeholder="Hotel, apartamento…" autocomplete="off">
+      </label>
+      <label class="campo">
+        <span class="campo__l">Dirección</span>
+        <input type="text" id="aloj-dir" placeholder="Calle, número, barrio" autocomplete="off">
+      </label>
+      <label class="campo">
+        <span class="campo__l">Algo que recordar <span class="campo__op">(opcional)</span></span>
+        <textarea id="aloj-nota" rows="2" placeholder="Check-in a partir de las 15:00, la llave está en una caja junto al portal…"></textarea>
+      </label>
+    </section>
+
+    <!-- ═══ 5 · QUIÉN VIAJA ═══ -->
+    <section class="paso" data-paso="4" hidden>
+      <h2 class="paso__t">¿Quién viaja?</h2>
+      <p class="paso__a">Esto cambia el itinerario de verdad: el número de paradas por bloque, si hay parón a mediodía y qué frases y avisos aparecen.</p>
+
+      <label class="campo">
+        <span class="campo__l">Nombres <span class="campo__op">(separados por comas)</span></span>
+        <input type="text" id="nombres" placeholder="Ana, Luis" autocomplete="off">
+      </label>
+
+      <div class="campo-par">
+        <label class="campo">
+          <span class="campo__l">Adultos</span>
+          <input type="number" id="adultos" min="1" max="12" value="2">
+        </label>
+        <label class="campo">
+          <span class="campo__l">Niños</span>
+          <input type="number" id="ninos" min="0" max="12" value="0">
+        </label>
+      </div>
+
+      <h3 class="paso__h">¿Hay algo que condicione el ritmo?</h3>
+      <div class="opciones-lista" id="perfiles"></div>
+    </section>
+
+    <!-- ═══ 6 · CÓMO VIAJAMOS ═══ -->
+    <section class="paso" data-paso="5" hidden>
+      <h2 class="paso__t">¿Cómo viajamos?</h2>
+
+      <h3 class="paso__h">Ritmo</h3>
+      <div class="opciones-lista" id="ritmos"></div>
+
+      <h3 class="paso__h">Presupuesto de comer</h3>
+      <div class="opciones-lista" id="presupuestos"></div>
+
+      <h3 class="paso__h">¿Qué nos interesa?</h3>
+      <p class="campo__ayuda">Lo imprescindible de cada ciudad sale siempre. Esto decide con qué se rellena el resto.</p>
+      <div class="chips-lista" id="intereses"></div>
+    </section>
+
+    <!-- ═══ 7 · TU ITINERARIO ═══ -->
+    <section class="paso" data-paso="6" hidden>
+      <h2 class="paso__t">Tu itinerario</h2>
+      <p class="paso__a">Pégalo tal y como lo tengas: una nota del móvil, un mensaje, un correo. No hace falta formato. Lo único que ayuda es empezar cada día con su nombre («Jueves 13», «Día 2») o separar los días con una línea en blanco.</p>
+
+      <div class="importar-acc">
+        <label class="boton boton--fantasma" for="fichero">Subir un fichero</label>
+        <input type="file" id="fichero" accept=".txt,.md,.json,text/plain,application/json" hidden>
+        <button type="button" class="boton boton--fantasma" id="btn-sugerir">Partir del itinerario sugerido</button>
+        <button type="button" class="boton boton--fantasma" id="btn-ejemplo">Ver un ejemplo</button>
+      </div>
+
+      <label class="campo">
+        <span class="campo__l">Itinerario</span>
+        <textarea id="itinerario" rows="16" spellcheck="false" placeholder="Jueves 13&#10;09:00 Piazza San Marco — a primera hora está vacía&#10;10:30 Mercado de Rialto&#10;13:30 Comer en La Zucca&#10;&#10;Viernes 14&#10;Burano&#10;Murano"></textarea>
+      </label>
+
+      <div id="vista-previa" class="vista-previa" hidden></div>
+    </section>
+
+    <!-- ═══ 8 · RESUMEN ═══ -->
+    <section class="paso" data-paso="7" hidden>
+      <h2 class="paso__t">Listo</h2>
+      <p class="paso__a">Esto es lo que se va a generar. Todo se puede cambiar después sin perder lo que ya esté marcado.</p>
+      <div id="resumen"></div>
+      <p class="campo__ayuda" id="avisos-resumen"></p>
+    </section>
+
+    <div class="nav-pasos">
+      <button type="button" class="boton boton--fantasma" id="btn-atras">Atrás</button>
+      <button type="button" class="boton" id="btn-siguiente">Siguiente</button>
+      <button type="submit" class="boton boton--grande" id="btn-generar" hidden>Generar el viaje</button>
+    </div>
+  </form>
+</main>
+
+<script src="js/paises.js"></script>
+<script src="js/idiomas.js"></script>
+<script src="js/packs/catalogo.js"></script>
+<script src="js/packs/venecia.js"></script>
+<script src="js/packs/roma.js"></script>
+<script src="js/packs/paris.js"></script>
+<script src="js/packs/lisboa.js"></script>
+<script src="js/packs/generico.js"></script>
+<script src="js/motor.js"></script>
+<script src="js/importar.js"></script>
+<script src="js/almacen.js"></script>
+<script src="js/crear.js"></script>
+</body>
+</html>

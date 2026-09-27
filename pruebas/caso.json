@@ -1,0 +1,6 @@
+{"destino":"venecia","inicio":"2026-08-12","fin":"2026-08-16",
+ "vuelos":{"ida":{"salida":"18:20","llegada":"20:45","desde":"MAD · Madrid","hastaCod":"VCE"},"vuelta":{"salida":"15:25","llegada":"17:50"}},
+ "alojamiento":{"nombre":"Hotel Ejemplo","dir":"Calle Ejemplo 10, Venezia","nota":"A 3 min de San Marco."},
+ "nombres":["Ana","Luis"],"adultos":2,"ninos":0,
+ "perfiles":["mayores"],"ritmo":"suave","presupuesto":"medio",
+ "intereses":["historia","comida","foto","arte"]}

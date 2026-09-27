@@ -1,0 +1,182 @@
+/* ============================================================
+   Bitácora — paletas por destino
+   La base (laguna) vive en app.css. Aquí sólo se reescriben los
+   tokens que cambian, y hay que hacerlo cuatro veces por paleta:
+   claro, oscuro por preferencia del sistema, oscuro forzado y
+   claro forzado. Si falta alguno, el interruptor de tema deja
+   de funcionar en un sentido.
+   ============================================================ */
+
+/* ══════════ TERRACOTA · Roma ══════════ */
+:root[data-paleta="terracota"] {
+  --fondo:        #F1ECE6;
+  --fondo-2:      #FFFDFB;
+  --fondo-3:      #E7DFD6;
+  --linea:        #D6C8B8;
+  --linea-suave:  #E2D8CB;
+  --tinta:        #2A1D14;
+  --tinta-2:      #5A4737;
+  --tinta-3:      #86705C;
+  --laton:        #9A4B24;
+  --laton-vivo:   #C2632F;
+  --laton-fondo:  #F7E6DA;
+  --laguna:       #4A6B3D;
+  --laguna-fondo: #E4EBDC;
+  --oxido:        #A03123;
+  --oxido-txt:    #8B2A1E;
+  --oxido-fondo:  #F8E2DE;
+  --sombra:       0 1px 2px rgba(42,29,20,.06), 0 4px 14px rgba(42,29,20,.05);
+  --sombra-alta:  0 2px 6px rgba(42,29,20,.10), 0 12px 32px rgba(42,29,20,.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-paleta="terracota"]:not([data-tema="claro"]) {
+    --fondo:        #1A1310;
+    --fondo-2:      #241A15;
+    --fondo-3:      #30231C;
+    --linea:        #46332A;
+    --linea-suave:  #392A22;
+    --tinta:        #F0E6DD;
+    --tinta-2:      #C6B2A2;
+    --tinta-3:      #9A8676;
+    --laton:        #E08A52;
+    --laton-vivo:   #EFA26C;
+    --laton-fondo:  #33200F;
+    --laguna:       #94BA80;
+    --laguna-fondo: #1D2A17;
+    --oxido:        #E0705A;
+    --oxido-txt:    #EE927F;
+    --oxido-fondo:  #37201C;
+  }
+}
+:root[data-paleta="terracota"][data-tema="oscuro"] {
+  --fondo: #1A1310; --fondo-2: #241A15; --fondo-3: #30231C;
+  --linea: #46332A; --linea-suave: #392A22;
+  --tinta: #F0E6DD; --tinta-2: #C6B2A2; --tinta-3: #9A8676;
+  --laton: #E08A52; --laton-vivo: #EFA26C; --laton-fondo: #33200F;
+  --laguna: #94BA80; --laguna-fondo: #1D2A17;
+  --oxido: #E0705A; --oxido-txt: #EE927F; --oxido-fondo: #37201C;
+}
+:root[data-paleta="terracota"][data-tema="claro"] {
+  --fondo: #F1ECE6; --fondo-2: #FFFDFB; --fondo-3: #E7DFD6;
+  --linea: #D6C8B8; --linea-suave: #E2D8CB;
+  --tinta: #2A1D14; --tinta-2: #5A4737; --tinta-3: #86705C;
+  --laton: #9A4B24; --laton-vivo: #C2632F; --laton-fondo: #F7E6DA;
+  --laguna: #4A6B3D; --laguna-fondo: #E4EBDC;
+  --oxido: #A03123; --oxido-txt: #8B2A1E; --oxido-fondo: #F8E2DE;
+}
+
+/* ══════════ AZULEJO · Lisboa ══════════ */
+:root[data-paleta="azulejo"] {
+  --fondo:        #ECEFF2;
+  --fondo-2:      #FFFFFF;
+  --fondo-3:      #DFE5EC;
+  --linea:        #C4D0DC;
+  --linea-suave:  #D6DEE7;
+  --tinta:        #12222E;
+  --tinta-2:      #3D5266;
+  --tinta-3:      #6B8093;
+  --laton:        #1E5B8C;
+  --laton-vivo:   #2E76AF;
+  --laton-fondo:  #DCE9F4;
+  --laguna:       #A8752A;
+  --laguna-fondo: #F5EBD9;
+  --oxido:        #A8452C;
+  --oxido-txt:    #8E3A25;
+  --oxido-fondo:  #F8E4DE;
+  --sombra:       0 1px 2px rgba(18,34,46,.06), 0 4px 14px rgba(18,34,46,.05);
+  --sombra-alta:  0 2px 6px rgba(18,34,46,.10), 0 12px 32px rgba(18,34,46,.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-paleta="azulejo"]:not([data-tema="claro"]) {
+    --fondo:        #0D1720;
+    --fondo-2:      #14222E;
+    --fondo-3:      #1C2E3D;
+    --linea:        #2C4356;
+    --linea-suave:  #223648;
+    --tinta:        #E3EBF2;
+    --tinta-2:      #A5BACC;
+    --tinta-3:      #78909F;
+    --laton:        #6BAEE0;
+    --laton-vivo:   #8AC4EF;
+    --laton-fondo:  #10283B;
+    --laguna:       #E0B463;
+    --laguna-fondo: #2E2413;
+    --oxido:        #DE7455;
+    --oxido-txt:    #EC957A;
+    --oxido-fondo:  #35211B;
+  }
+}
+:root[data-paleta="azulejo"][data-tema="oscuro"] {
+  --fondo: #0D1720; --fondo-2: #14222E; --fondo-3: #1C2E3D;
+  --linea: #2C4356; --linea-suave: #223648;
+  --tinta: #E3EBF2; --tinta-2: #A5BACC; --tinta-3: #78909F;
+  --laton: #6BAEE0; --laton-vivo: #8AC4EF; --laton-fondo: #10283B;
+  --laguna: #E0B463; --laguna-fondo: #2E2413;
+  --oxido: #DE7455; --oxido-txt: #EC957A; --oxido-fondo: #35211B;
+}
+:root[data-paleta="azulejo"][data-tema="claro"] {
+  --fondo: #ECEFF2; --fondo-2: #FFFFFF; --fondo-3: #DFE5EC;
+  --linea: #C4D0DC; --linea-suave: #D6DEE7;
+  --tinta: #12222E; --tinta-2: #3D5266; --tinta-3: #6B8093;
+  --laton: #1E5B8C; --laton-vivo: #2E76AF; --laton-fondo: #DCE9F4;
+  --laguna: #A8752A; --laguna-fondo: #F5EBD9;
+  --oxido: #A8452C; --oxido-txt: #8E3A25; --oxido-fondo: #F8E4DE;
+}
+
+/* ══════════ ZINC · París ══════════ */
+:root[data-paleta="zinc"] {
+  --fondo:        #EEEEEC;
+  --fondo-2:      #FFFFFF;
+  --fondo-3:      #E2E3E0;
+  --linea:        #CBCCC8;
+  --linea-suave:  #DBDCD8;
+  --tinta:        #1C1E1D;
+  --tinta-2:      #4A4D4B;
+  --tinta-3:      #767976;
+  --laton:        #7A5B86;
+  --laton-vivo:   #9A75A8;
+  --laton-fondo:  #EFE5F3;
+  --laguna:       #3F6B72;
+  --laguna-fondo: #DEEAEC;
+  --oxido:        #9E4230;
+  --oxido-txt:    #863628;
+  --oxido-fondo:  #F6E3DF;
+  --sombra:       0 1px 2px rgba(28,30,29,.06), 0 4px 14px rgba(28,30,29,.05);
+  --sombra-alta:  0 2px 6px rgba(28,30,29,.10), 0 12px 32px rgba(28,30,29,.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-paleta="zinc"]:not([data-tema="claro"]) {
+    --fondo:        #131414;
+    --fondo-2:      #1D1F1F;
+    --fondo-3:      #282B2A;
+    --linea:        #3D4140;
+    --linea-suave:  #303433;
+    --tinta:        #E9EAE8;
+    --tinta-2:      #B2B5B2;
+    --tinta-3:      #858886;
+    --laton:        #C4A0D2;
+    --laton-vivo:   #D4B6DF;
+    --laton-fondo:  #2A2030;
+    --laguna:       #7FB3B9;
+    --laguna-fondo: #17292B;
+    --oxido:        #DB7159;
+    --oxido-txt:    #E9927D;
+    --oxido-fondo:  #33201B;
+  }
+}
+:root[data-paleta="zinc"][data-tema="oscuro"] {
+  --fondo: #131414; --fondo-2: #1D1F1F; --fondo-3: #282B2A;
+  --linea: #3D4140; --linea-suave: #303433;
+  --tinta: #E9EAE8; --tinta-2: #B2B5B2; --tinta-3: #858886;
+  --laton: #C4A0D2; --laton-vivo: #D4B6DF; --laton-fondo: #2A2030;
+  --laguna: #7FB3B9; --laguna-fondo: #17292B;
+  --oxido: #DB7159; --oxido-txt: #E9927D; --oxido-fondo: #33201B;
+}
+:root[data-paleta="zinc"][data-tema="claro"] {
+  --fondo: #EEEEEC; --fondo-2: #FFFFFF; --fondo-3: #E2E3E0;
+  --linea: #CBCCC8; --linea-suave: #DBDCD8;
+  --tinta: #1C1E1D; --tinta-2: #4A4D4B; --tinta-3: #767976;
+  --laton: #7A5B86; --laton-vivo: #9A75A8; --laton-fondo: #EFE5F3;
+  --laguna: #3F6B72; --laguna-fondo: #DEEAEC;
+  --oxido: #9E4230; --oxido-txt: #863628; --oxido-fondo: #F6E3DF;
+}

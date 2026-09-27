@@ -1,0 +1,369 @@
+/* ============================================================
+   Bitácora — portada, asistente y los añadidos de la app
+   Reutiliza los tokens de app.css: aquí no se define ni un
+   color nuevo, sólo componentes.
+   ============================================================ */
+
+/* Las páginas de marca no llevan la barra de pestañas de abajo */
+.pagina-marca { padding-bottom: 0; }
+
+/* ---------- Barra superior ---------- */
+.barra {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  padding: 12px max(16px, env(safe-area-inset-left)) 12px max(16px, env(safe-area-inset-right));
+  background: color-mix(in srgb, var(--fondo) 88%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid var(--linea-suave);
+}
+.barra__logo {
+  font-family: var(--display);
+  font-size: 1.15rem; font-weight: 600;
+  color: var(--tinta); text-decoration: none;
+  letter-spacing: .01em;
+}
+.barra__logo::before {
+  content: '◆';
+  color: var(--laton);
+  margin-right: .45em;
+  font-size: .8em;
+  vertical-align: .08em;
+}
+
+/* ---------- Bloques de página ---------- */
+.hero, .seccion, .asistente, .pie {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 0 max(16px, env(safe-area-inset-left)) 0 max(16px, env(safe-area-inset-right));
+}
+
+.hero { padding-top: 40px; padding-bottom: 40px; }
+.hero__k {
+  font-size: .78rem; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--laton); font-weight: 600; margin-bottom: 14px;
+}
+.hero__t {
+  font-size: clamp(2rem, 8vw, 3rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+}
+.hero__d { color: var(--tinta-2); font-size: 1.05rem; margin-bottom: 24px; }
+.hero__acc { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.hero__pie { font-size: .85rem; color: var(--tinta-3); }
+
+.seccion { padding-top: 34px; padding-bottom: 34px; border-top: 1px solid var(--linea-suave); }
+.seccion__t { font-size: 1.5rem; margin-bottom: 12px; }
+.seccion__a { color: var(--tinta-2); margin-bottom: 20px; }
+.seccion__a--sm { font-size: .85rem; color: var(--tinta-3); margin-top: 18px; margin-bottom: 0; }
+.cierre { text-align: center; }
+.cierre .seccion__t { margin-bottom: 18px; }
+
+.pie {
+  padding-top: 26px; padding-bottom: 40px;
+  border-top: 1px solid var(--linea-suave);
+  color: var(--tinta-3); font-size: .85rem;
+}
+.pie p + p { margin-top: 6px; }
+
+/* ---------- Botones ---------- */
+.boton--grande {
+  font-size: 1.02rem;
+  padding: 13px 24px;
+}
+.boton--fantasma { background: transparent; }
+
+/* ---------- Cómo funciona ---------- */
+.pasos-lista { display: grid; gap: 16px; }
+.pasos-lista li {
+  background: var(--fondo-2);
+  border: 1px solid var(--linea-suave);
+  border-radius: var(--r);
+  padding: 16px 18px;
+  box-shadow: var(--sombra);
+}
+.pasos-lista h3 { font-size: 1.05rem; margin-bottom: 6px; color: var(--laton); }
+.pasos-lista p { color: var(--tinta-2); }
+
+/* ---------- Tarjetas de características ---------- */
+.tarjetas { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 620px) { .tarjetas { grid-template-columns: 1fr 1fr; } }
+.tarj {
+  background: var(--fondo-2);
+  border: 1px solid var(--linea-suave);
+  border-left: 3px solid var(--laton);
+  border-radius: var(--r);
+  padding: 15px 16px;
+}
+.tarj h3 { font-size: 1rem; margin-bottom: 6px; }
+.tarj p { color: var(--tinta-2); font-size: .94rem; }
+
+/* ---------- Destinos ---------- */
+.destinos { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .destinos { grid-template-columns: 1fr 1fr; } }
+
+.destino {
+  display: block; width: 100%; text-align: left;
+  background: var(--fondo-2);
+  border: 1px solid var(--linea);
+  border-radius: var(--r);
+  padding: 14px 15px;
+  color: inherit; text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.destino:hover { border-color: var(--laton); }
+.destino.es-elegido {
+  border-color: var(--laton);
+  box-shadow: inset 0 0 0 1px var(--laton);
+  background: var(--laton-fondo);
+}
+.destino__b { display: block; font-size: 1.4rem; line-height: 1; margin-bottom: 8px; }
+.destino__c { display: block; font-family: var(--display); font-size: 1.15rem; font-weight: 600; }
+.destino__p { display: block; font-size: .78rem; color: var(--tinta-3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.destino__g { display: block; font-size: .9rem; color: var(--tinta-2); }
+
+/* ---------- Planes ---------- */
+.planes { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .planes { grid-template-columns: repeat(3, 1fr); } }
+.plan {
+  background: var(--fondo-2);
+  border: 1px solid var(--linea);
+  border-radius: var(--r);
+  padding: 18px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.plan--destacado { border-color: var(--laton); box-shadow: var(--sombra-alta); }
+.plan__n { font-size: 1.1rem; }
+.plan__p { font-family: var(--display); font-size: 1.7rem; font-weight: 600; color: var(--laton); }
+.plan__p span { font-family: var(--texto); font-size: .85rem; font-weight: 400; color: var(--tinta-3); }
+.plan__l { display: grid; gap: 6px; flex: 1; }
+.plan__l li { font-size: .92rem; color: var(--tinta-2); padding-left: 18px; position: relative; }
+.plan__l li::before { content: '·'; position: absolute; left: 6px; color: var(--laton); font-weight: 700; }
+.plan .boton { align-self: flex-start; }
+
+/* ---------- Mis viajes ---------- */
+.viaje-fila {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 10px;
+  background: var(--fondo-2);
+  border: 1px solid var(--linea-suave);
+  border-radius: var(--r);
+  padding: 12px 14px;
+}
+.viaje-fila + .viaje-fila { margin-top: 10px; }
+.viaje-fila__link { flex: 1 1 12rem; min-width: 0; text-decoration: none; color: inherit; }
+.viaje-fila__c { display: block; font-family: var(--display); font-size: 1.1rem; font-weight: 600; }
+.viaje-fila__f { display: block; font-size: .85rem; color: var(--tinta-2); }
+.viaje-fila__q { display: block; font-size: .8rem; color: var(--tinta-3); }
+.viaje-fila__acc { display: flex; gap: 6px; flex-shrink: 0; }
+
+.mini-b {
+  font: inherit; font-size: .82rem;
+  padding: 6px 10px;
+  border: 1px solid var(--linea);
+  border-radius: var(--r-sm);
+  background: var(--fondo-3);
+  color: var(--tinta-2);
+  text-decoration: none;
+  cursor: pointer;
+}
+.mini-b:hover { border-color: var(--laton); color: var(--laton); }
+.mini-b--peligro:hover { border-color: var(--oxido); color: var(--oxido-txt); }
+
+/* ============================================================
+   ASISTENTE
+   ============================================================ */
+.asistente { padding-top: 22px; padding-bottom: 60px; }
+
+.pasos { display: flex; gap: 6px; margin-bottom: 26px; }
+.pasos__p {
+  flex: 1; height: 4px; border-radius: 2px;
+  background: var(--linea);
+}
+.pasos__p.es-hecho { background: var(--laton); opacity: .55; }
+.pasos__p.es-actual { background: var(--laton); }
+
+.paso__t { font-size: 1.6rem; margin-bottom: 10px; }
+.paso__a { color: var(--tinta-2); margin-bottom: 22px; }
+.paso__h {
+  font-size: .78rem; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--tinta-3); font-family: var(--texto); font-weight: 600;
+  margin: 26px 0 12px;
+}
+
+.campo { display: block; margin-bottom: 16px; }
+.campo__l { display: block; font-size: .88rem; font-weight: 600; color: var(--tinta-2); margin-bottom: 6px; }
+.campo__op { font-weight: 400; color: var(--tinta-3); }
+.campo__ayuda { display: block; font-size: .82rem; color: var(--tinta-3); margin-top: 6px; }
+
+.campo input[type="text"],
+.campo input[type="date"],
+.campo input[type="time"],
+.campo input[type="number"],
+.campo select,
+.campo textarea {
+  width: 100%;
+  max-width: 100%;
+  font: inherit;
+  font-size: 1rem;                 /* 16px o iOS hace zoom al enfocar */
+  padding: 11px 12px;
+  border: 1px solid var(--linea);
+  border-radius: var(--r-sm);
+  background: var(--fondo-2);
+  color: var(--tinta);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.campo select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--tinta-3) 50%),
+                    linear-gradient(135deg, var(--tinta-3) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+}
+.campo textarea { resize: vertical; }
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  outline: 2px solid var(--laton-vivo); outline-offset: 1px; border-color: var(--laton);
+}
+
+.campo-par { display: grid; gap: 0 12px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 380px) { .campo-par { grid-template-columns: 1fr; } }
+
+/* --- opciones en lista --- */
+.opciones-lista { display: grid; gap: 10px; }
+.opcion-b {
+  display: block; width: 100%; text-align: left;
+  font: inherit;
+  background: var(--fondo-2);
+  border: 1px solid var(--linea);
+  border-radius: var(--r);
+  padding: 13px 15px;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.opcion-b:hover { border-color: var(--laton); }
+.opcion-b.es-elegido {
+  border-color: var(--laton);
+  background: var(--laton-fondo);
+  box-shadow: inset 0 0 0 1px var(--laton);
+}
+.opcion-b__t { display: block; font-weight: 600; margin-bottom: 3px; }
+.opcion-b__d { display: block; font-size: .88rem; color: var(--tinta-2); }
+
+/* --- chips seleccionables --- */
+.chips-lista { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-b {
+  font: inherit; font-size: .9rem;
+  padding: 8px 14px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: var(--fondo-2);
+  color: var(--tinta-2);
+  cursor: pointer;
+}
+.chip-b.es-elegido {
+  background: var(--laton-fondo);
+  border-color: var(--laton);
+  color: var(--laton);
+  font-weight: 600;
+}
+
+/* --- resumen --- */
+.resumen {
+  background: var(--fondo-2);
+  border: 1px solid var(--linea-suave);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.resumen__f {
+  display: grid; grid-template-columns: 9rem 1fr; gap: 10px;
+  padding: 11px 14px;
+}
+.resumen__f + .resumen__f { border-top: 1px solid var(--linea-suave); }
+.resumen__f dt { font-size: .82rem; color: var(--tinta-3); text-transform: uppercase; letter-spacing: .06em; }
+.resumen__f dd { margin: 0; word-break: break-word; }
+@media (max-width: 420px) {
+  .resumen__f { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* --- importar itinerario --- */
+.importar-acc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.importar-acc .boton { font-size: .9rem; padding: 9px 14px; }
+label.boton { cursor: pointer; }
+
+#itinerario {
+  font-family: var(--mono);
+  font-size: .92rem;
+  line-height: 1.55;
+  min-height: 15rem;
+}
+
+.vista-previa {
+  margin-top: 18px;
+  background: var(--fondo-2);
+  border: 1px solid var(--linea-suave);
+  border-radius: var(--r);
+  padding: 14px 16px;
+}
+.vista-previa__t { font-size: 1rem; margin-bottom: 10px; }
+.vista-previa__l { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; counter-reset: d; }
+.vista-previa__l > li > b {
+  display: block; font-family: var(--display); font-size: 1rem;
+  color: var(--laton); margin-bottom: 4px;
+}
+.vista-previa__l ul { display: grid; gap: 2px; }
+.vista-previa__l ul li {
+  font-size: .9rem; color: var(--tinta-2);
+  padding-left: 12px; position: relative;
+  overflow-wrap: anywhere;
+}
+.vista-previa__l ul li::before { content: '·'; position: absolute; left: 2px; color: var(--tinta-3); }
+.vp-h { font-family: var(--mono); font-size: .82rem; color: var(--tinta-3); }
+.vp-ok {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .06em;
+  background: var(--laguna-fondo); color: var(--laguna);
+  padding: 1px 6px; border-radius: 999px; white-space: nowrap;
+}
+.vista-previa__a { margin-top: 12px; font-size: .86rem; color: var(--tinta-3); }
+
+/* Alternativa de presupuesto que no encaja con este viaje */
+.alt--descartada { opacity: .55; }
+.alt--descartada .alt__i { text-decoration: line-through; }
+
+.nav-pasos {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-top: 34px;
+  padding-top: 20px;
+  border-top: 1px solid var(--linea-suave);
+}
+.nav-pasos .boton { flex: 1 1 8rem; justify-content: center; text-align: center; }
+
+/* ============================================================
+   AÑADIDOS A LA APP DEL VIAJE
+   ============================================================ */
+
+/* Paradas y restaurantes que vienen de la plantilla genérica */
+.tarjeta--plantilla { border-style: dashed; }
+.rest--plantilla { border-style: dashed; }
+.chip--plantilla { background: var(--fondo-3); color: var(--tinta-3); }
+.dist--caro {
+  background: var(--oxido-fondo);
+  color: var(--oxido-txt);
+}
+
+.acciones-viaje { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+
+/* Pantalla de "no hay viaje" */
+.sin-viaje {
+  min-height: 70vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px;
+}
+.sin-viaje__caja { max-width: 26rem; text-align: center; }
+.sin-viaje__caja h1 { font-size: 1.5rem; margin-bottom: 10px; }
+.sin-viaje__caja p { color: var(--tinta-2); margin-bottom: 20px; }
+.sin-viaje__caja .boton { margin: 0 5px 8px; }

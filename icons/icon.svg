@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Venecia">
+  <rect width="512" height="512" rx="112" fill="#0C1A1C"/>
+  <text x="256" y="322" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-style="italic"
+        font-size="290" font-weight="600" fill="#D2A052">V</text>
+  <g fill="none" stroke="#2E6F6B" stroke-width="14" stroke-linecap="round" opacity="0.85">
+    <path d="M104 392q19 -18 38 0t38 0q19 -18 38 0t38 0q19 -18 38 0t38 0q19 -18 38 0t38 0"/>
+  </g>
+</svg>

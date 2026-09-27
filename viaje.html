@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi viaje · Bitácora</title>
+<meta name="description" content="Itinerario con horas, restaurantes, frases y presupuesto del viaje, generado a medida y disponible sin conexión.">
+<meta name="theme-color" content="#0C1A1C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bitácora">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/paletas.css">
+<link rel="stylesheet" href="css/marca.css">
+</head>
+<body>
+
+<a class="salta" href="#principal">Saltar al contenido</a>
+
+<!-- Si no hay ningún viaje que abrir -->
+<section class="sin-viaje" id="sin-viaje" hidden>
+  <div class="sin-viaje__caja">
+    <h1>No hay ningún viaje abierto</h1>
+    <p>Este enlace no lleva ningún viaje dentro y en este móvil todavía no hay ninguno guardado.</p>
+    <a class="boton boton--grande" href="crear.html">Crear un viaje</a>
+    <a class="boton boton--fantasma" href="index.html">Volver al inicio</a>
+  </div>
+</section>
+
+<div id="envoltorio" hidden>
+
+<header class="cabecera">
+  <div class="cabecera__interior">
+    <div class="cabecera__texto">
+      <h1 class="cabecera__titulo" id="cab-titulo">—</h1>
+      <p class="cabecera__sub" id="cab-sub"></p>
+    </div>
+    <div class="cabecera__acciones">
+      <button type="button" id="btn-suave" class="pastilla" aria-pressed="false" title="Oculta las paradas opcionales">
+        Modo suave
+      </button>
+      <button type="button" id="btn-tema" class="icono" aria-label="Cambiar entre tema claro y oscuro">
+        <span aria-hidden="true" id="icono-tema">◐</span>
+      </button>
+    </div>
+  </div>
+  <div class="marea" aria-hidden="true"></div>
+</header>
+
+<main id="principal">
+
+  <!-- ══════════ ITINERARIO ══════════ -->
+  <section class="panel" id="panel-itinerario" role="tabpanel" aria-labelledby="tab-itinerario">
+    <div class="dias-barra" id="dias-barra" role="tablist" aria-label="Días del viaje"></div>
+    <div id="dias-contenido"></div>
+  </section>
+
+  <!-- ══════════ COMER ══════════ -->
+  <section class="panel" id="panel-comer" role="tabpanel" aria-labelledby="tab-comer" hidden>
+    <div class="intro">
+      <h2>Dónde comer</h2>
+      <p id="comer-intro"></p>
+    </div>
+    <div class="filtros" id="filtros-comer" role="group" aria-label="Filtrar restaurantes"></div>
+    <div class="rejilla" id="lista-comer"></div>
+    <div class="nota-pie" id="comer-reglas"></div>
+  </section>
+
+  <!-- ══════════ IDIOMA ══════════ -->
+  <section class="panel" id="panel-idioma" role="tabpanel" aria-labelledby="tab-idioma" hidden>
+    <div class="intro">
+      <h2 id="idioma-h">Idioma</h2>
+      <p>Tocando una frase se abre en grande, para poder enseñársela a alguien. La tercera línea es cómo se pronuncia, leída tal cual en español.</p>
+      <p class="ayuda" id="idioma-nota"></p>
+    </div>
+    <div class="buscador">
+      <input type="search" id="buscar-frase" placeholder="Buscar una frase…" aria-label="Buscar una frase" autocomplete="off">
+    </div>
+    <div class="filtros" id="filtros-frases" role="group" aria-label="Filtrar por categoría"></div>
+    <div id="lista-frases"></div>
+    <p class="vacio" id="frases-vacio" hidden>No hay ninguna frase que encaje con esa búsqueda.</p>
+  </section>
+
+  <!-- ══════════ PRESUPUESTO ══════════ -->
+  <section class="panel" id="panel-presupuesto" role="tabpanel" aria-labelledby="tab-presupuesto" hidden>
+    <div class="intro">
+      <h2>Presupuesto</h2>
+      <p id="presu-intro"></p>
+    </div>
+
+    <div class="total-caja">
+      <span class="total-caja__etiqueta">Total estimado</span>
+      <strong class="total-caja__cifra" id="total-cifra">—</strong>
+      <span class="total-caja__pie" id="total-pie"></span>
+    </div>
+
+    <div id="presupuesto-opciones"></div>
+
+    <h3 class="seccion-h">Gastos fijos</h3>
+    <table class="tabla">
+      <thead><tr><th scope="col">Concepto</th><th scope="col" class="num">Importe</th></tr></thead>
+      <tbody id="presupuesto-fijos"></tbody>
+    </table>
+
+    <h3 class="seccion-h">Lo que gastamos de verdad</h3>
+    <p class="ayuda">Se va apuntando sobre la marcha para ver cómo va frente a lo previsto. Se guarda en este móvil.</p>
+    <form class="gasto-form" id="gasto-form">
+      <input type="text" id="gasto-concepto" placeholder="En qué" aria-label="Concepto del gasto" required maxlength="60">
+      <input type="number" id="gasto-importe" placeholder="€" aria-label="Importe" step="0.01" min="0" required inputmode="decimal">
+      <button type="submit" class="boton">Añadir</button>
+    </form>
+    <div id="gastos-resumen"></div>
+    <ul class="gastos-lista" id="gastos-lista"></ul>
+
+    <p class="nota-pie-sm" id="presupuesto-fuera"></p>
+  </section>
+
+  <!-- ══════════ INFO ══════════ -->
+  <section class="panel" id="panel-info" role="tabpanel" aria-labelledby="tab-info" hidden>
+
+    <div class="intro">
+      <h2>Antes de salir</h2>
+      <p>Lo que hay que dejar resuelto en casa.</p>
+    </div>
+    <div id="checklist"></div>
+
+    <h3 class="seccion-h">Si pasa algo</h3>
+    <div class="urgencias" id="urgencias"></div>
+    <div class="hospital" id="hospital"></div>
+
+    <h3 class="seccion-h">Conviene saber</h3>
+    <div id="consejos"></div>
+
+    <h3 class="seccion-h">Nuestros datos</h3>
+    <div id="datos-viaje"></div>
+
+    <h3 class="seccion-h">Este viaje</h3>
+    <div class="acciones-viaje">
+      <button type="button" class="boton" id="btn-compartir">Compartir el viaje</button>
+      <button type="button" class="boton boton--fantasma" id="btn-exportar">Descargar el itinerario</button>
+      <a class="boton boton--fantasma" id="btn-editar" href="crear.html">Cambiar los datos</a>
+      <a class="boton boton--fantasma" href="index.html">Mis viajes</a>
+    </div>
+    <p class="ayuda" id="compartir-aviso" hidden></p>
+
+    <div class="creditos">
+      <p id="credito-perfil"></p>
+      <p>Lo que se va marcando (paradas visitadas, gastos, tema) se guarda sólo en este móvil: no se sincroniza entre teléfonos.</p>
+      <p id="credito-precios"></p>
+      <button type="button" class="boton boton--fantasma" id="btn-borrar">Borrar lo marcado en este móvil</button>
+    </div>
+  </section>
+
+</main>
+
+<nav class="tabs" role="tablist" aria-label="Secciones">
+  <button type="button" class="tabs__b" id="tab-itinerario"   role="tab" aria-selected="true"  aria-controls="panel-itinerario" data-panel="itinerario">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V6a2 2 0 0 1 2-2h9l5 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 4v6h6"/><path d="M8 13h7M8 16.5h5"/></svg>
+    <span>Itinerario</span>
+  </button>
+  <button type="button" class="tabs__b" id="tab-comer"        role="tab" aria-selected="false" aria-controls="panel-comer" data-panel="comer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v8a2.5 2.5 0 0 0 5 0V3"/><path d="M8.5 3v18"/><path d="M17.5 3c-1.5 1.5-2 3.5-2 5.5s.5 3 2 3.5V21"/></svg>
+    <span>Comer</span>
+  </button>
+  <button type="button" class="tabs__b" id="tab-idioma"       role="tab" aria-selected="false" aria-controls="panel-idioma" data-panel="idioma">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h10M8 3v2c0 4-2 7-5 9"/><path d="M6 10c1.5 2.5 3.5 4 6 5"/><path d="M12 20l4.5-11 4.5 11"/><path d="M14 16.5h5"/></svg>
+    <span>Idioma</span>
+  </button>
+  <button type="button" class="tabs__b" id="tab-presupuesto"  role="tab" aria-selected="false" aria-controls="panel-presupuesto" data-panel="presupuesto">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M15 9.2A3.6 3.6 0 0 0 12.2 8C10 8 8.7 9.8 8.7 12s1.3 4 3.5 4A3.6 3.6 0 0 0 15 14.8"/><path d="M7.2 11.2h5M7.2 13.2h5"/></svg>
+    <span>Dinero</span>
+  </button>
+  <button type="button" class="tabs__b" id="tab-info"         role="tab" aria-selected="false" aria-controls="panel-info" data-panel="info">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/></svg>
+    <span>Info</span>
+  </button>
+</nav>
+
+<!-- Frase a pantalla completa, para enseñarla -->
+<div class="grande" id="grande" hidden>
+  <button type="button" class="grande__cerrar" id="grande-cerrar" aria-label="Cerrar">✕</button>
+  <div class="grande__caja">
+    <p class="grande__es" id="grande-es"></p>
+    <p class="grande__it" id="grande-it"></p>
+    <p class="grande__pr" id="grande-pr"></p>
+  </div>
+</div>
+
+</div><!-- /envoltorio -->
+
+<script src="js/paises.js"></script>
+<script src="js/idiomas.js"></script>
+<script src="js/packs/catalogo.js"></script>
+<script src="js/packs/venecia.js"></script>
+<script src="js/packs/roma.js"></script>
+<script src="js/packs/paris.js"></script>
+<script src="js/packs/lisboa.js"></script>
+<script src="js/packs/generico.js"></script>
+<script src="js/motor.js"></script>
+<script src="js/almacen.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
