@@ -10,6 +10,18 @@ Dices a dónde vas, cuándo llegan tus vuelos, dónde duermes y con quién viaja
 ![PWA](https://img.shields.io/badge/PWA-offline-5A0FC8?logo=pwa&logoColor=white)
 ![Vercel](https://img.shields.io/badge/deploy-Vercel-000?logo=vercel)
 
+## 👉 Demo: [venecia2026.vercel.app](https://venecia2026.vercel.app)
+
+[![Ver la demo](https://img.shields.io/badge/Abrir%20la%20demo-venecia2026.vercel.app-0C1A1C?style=for-the-badge&logo=vercel)](https://venecia2026.vercel.app)
+
+Es la app real que hice para nuestro viaje a Venecia (Jorge y Elisabeth, del 12 al 16 de agosto de 2026). Ábrela en el móvil, pulsa "Añadir a pantalla de inicio" y ponla en modo avión: sigue funcionando.
+
+### Cómo nació
+
+Le pasé mi itinerario a Claude y le pedí una app para llevarlo en el móvil. Lo útil no fue la app. Fue que, antes de escribir una sola línea de código, me dijo que tenía un puente colocado en el barrio equivocado, que el 15 de agosto cierra media ciudad por Ferragosto y que mi vuelo aterrizaba demasiado tarde para el primer día que había planificado. Cuatro fallos que no habría descubierto hasta estar allí.
+
+Este repositorio es la versión generalizada: el mismo motor, preparado para que cualquiera lo adapte a su viaje. **[Salta a "Adáptalo a tu viaje"](#-adáptalo-a-tu-viaje)**.
+
 ---
 
 ## ✨ Qué hace
@@ -27,6 +39,82 @@ Dices a dónde vas, cuándo llegan tus vuelos, dónde duermes y con quién viaja
 ### Destinos
 
 Contenido completo para **Venecia, Roma, París y Lisboa** (sitios reales, precios, trucos y avisos). Para cualquier otro destino se genera el esqueleto del viaje —traslados, horarios, dinero, frases y checklist— listo para rellenar.
+
+## 🧳 Adáptalo a tu viaje
+
+### Lo que necesitas
+
+- [Git](https://git-scm.com/downloads) y [Node.js](https://nodejs.org) (versión 18 o superior).
+- Opcional, para que la IA lo adapte por ti: [Claude Code](https://claude.com/claude-code).
+- Opcional, para publicarlo con tu propia web: una cuenta gratuita de [Vercel](https://vercel.com).
+
+### Paso 1 · Descárgalo y ábrelo
+
+```bash
+git clone https://github.com/joorjozc/bitacora.git
+cd bitacora
+npx serve .
+```
+
+Abre la dirección que aparece (normalmente `http://localhost:3000`) y entra en **Crear mi viaje**.
+
+### Paso 2 · Elige el camino
+
+**A. Sin tocar código.** Si vas a Venecia, Roma, París o Lisboa, rellena el asistente y listo. Si ya tienes el itinerario escrito (de una guía, de un blog o de un chat con una IA), elige **"Ya tengo mi itinerario"** y pégalo tal cual: se le ponen horas, traslados, precios y avisos.
+
+**B. Con IA, para cualquier destino.** Dentro de la carpeta `bitacora`, abre Claude Code:
+
+```bash
+claude
+```
+
+Y pega este prompt, rellenando lo que va entre corchetes:
+
+```text
+Quiero adaptar Bitácora (esta carpeta) a mi viaje. Mis datos:
+
+- Destino: [ciudad, país]
+- Fechas: [del DD/MM/AAAA al DD/MM/AAAA]
+- Vuelo de ida: [aeropuerto de salida] a las [HH:MM], llega a [aeropuerto] a las [HH:MM]
+- Vuelo de vuelta: sale a las [HH:MM], llega a las [HH:MM]
+- Alojamiento: [nombre y dirección]
+- Quién viaja: [nombres], [n.º adultos] adultos y [n.º niños] niños
+- Perfiles (si aplica): [embarazo / niños pequeños / movilidad reducida / mayores]
+- Ritmo: [suave / normal / intenso]
+- Presupuesto: [ajustado / medio / holgado]
+- Intereses: [historia, arte, comida, fotos, naturaleza, compras...]
+- Mi itinerario, si ya lo tengo: [pégalo aquí o escribe "propónmelo tú"]
+
+Antes de tocar código, revisa el plan y dime todo lo que no encaje:
+sitios que no están en el barrio que creo, festivos o cierres en mis
+fechas, horas imposibles por los vuelos, calor, distancias o escaleras
+que no convengan a quien viaja. Espera a que te confirme los cambios.
+
+Después:
+1. Si el destino ya tiene pack en js/packs/, úsalo. Si no, crea
+   js/packs/<ciudad>.js con la misma estructura que js/packs/venecia.js
+   (lugares reales con su búsqueda de Google Maps, horarios, días de
+   cierre, precios, restaurantes, transporte y trucos). Regístralo en
+   js/packs/catalogo.js y añade el fichero en crear.html, viaje.html,
+   la lista ARCHIVOS de sw.js y la lista de pruebas/humo.js y
+   pruebas/ver.js. Si el país no está en js/paises.js, añádelo.
+2. Guarda mi viaje en pruebas/caso.json, ejecuta node pruebas/humo.js
+   y node pruebas/ver.js, y enséñame el itinerario que sale.
+3. Sube el número de VERSION en sw.js.
+
+No inventes datos: si no estás seguro de un horario, un precio o una
+dirección, márcalo para que lo compruebe yo.
+```
+
+### Paso 3 · Publícalo con tu propia web
+
+```bash
+npx vercel --prod
+```
+
+La primera vez te pedirá iniciar sesión en Vercel y ponerle nombre al proyecto. Al terminar te da una dirección tipo `https://tu-viaje.vercel.app` que puedes abrir en el móvil, instalar y compartir con quien viaja contigo. En Windows también vale `.\deploy.ps1`.
+
+> Cada vez que cambies algo, sube el número de `VERSION` en `sw.js` antes de volver a publicar, o los móviles seguirán viendo la versión anterior.
 
 ## 🧠 Cómo funciona por dentro
 
@@ -72,16 +160,6 @@ node pruebas/humo.js             # coherencia del itinerario en los cuatro desti
 node pruebas/importar.test.js    # importación de itinerarios propios
 node pruebas/ver.js              # imprime un viaje de ejemplo (pruebas/caso.json)
 ```
-
-## 📦 Despliegue
-
-Está preparado para Vercel (`vercel.json` define las cabeceras de caché). Con Node instalado:
-
-```powershell
-.\deploy.ps1
-```
-
-> Cada vez que cambies un fichero, sube el número de `VERSION` en `sw.js`; si no, los móviles que ya tengan la app instalada seguirán viendo la versión en caché.
 
 ## 📄 Licencia
 
