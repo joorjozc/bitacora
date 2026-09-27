@@ -14,7 +14,7 @@ Dices a dónde vas, cuándo llegan tus vuelos, dónde duermes y con quién viaja
 
 [![Ver la demo](https://img.shields.io/badge/Abrir%20la%20demo-venecia2026.vercel.app-0C1A1C?style=for-the-badge&logo=vercel)](https://venecia2026.vercel.app)
 
-Es la app real que hice para nuestro viaje a Venecia (Jorge y Elisabeth, del 12 al 16 de agosto de 2026). Ábrela en el móvil, pulsa "Añadir a pantalla de inicio" y ponla en modo avión: sigue funcionando.
+Es la app real que hice para un viaje a Venecia. Ábrela en el móvil, pulsa "Añadir a pantalla de inicio" y ponla en modo avión: sigue funcionando.
 
 ### Cómo nació
 
